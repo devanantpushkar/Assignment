@@ -1,0 +1,38 @@
+# Dependency Document
+
+## Overview
+This project relies on several key open-source libraries to perform Computer Vision, Optical Character Recognition (OCR), and Natural Language Processing (NLP) tasks.
+
+## Core Dependencies
+
+### 1. OpenCV (`opencv-python-headless`)
+- **Purpose**: Image pre-processing and manipulation.
+- **Usage**: Loading images, converting to grayscale, denoising, adaptive thresholding, and drawing redaction boxes.
+- **Version**: Headless version is used to avoid GUI dependency issues in server environments.
+
+### 2. EasyOCR (`easyocr`)
+- **Purpose**: Optical Character Recognition.
+- **Usage**: Extracting text from handwritten document images. It uses deep learning models (CRAFT for detection, CRNN for recognition).
+- **Note**: Configured to run on CPU (`gpu=False`) for broad compatibility, but supports CUDA.
+
+### 3. Microsoft Presidio (`presidio-analyzer`, `presidio-anonymizer`)
+- **Purpose**: PII Identification and Redaction.
+- **Usage**:
+    - `presidio-analyzer`: Analyzes text to find entities like PERSON, DATE_TIME, PHONE_NUMBER, etc.
+    - `presidio-anonymizer`: Replaces detected PII in text with placeholders.
+- **Backend**: Uses `spaCy` NLP models.
+
+### 4. Spacy (`spacy`)
+- **Purpose**: NLP engine for Presidio.
+- **Model**: `en_core_web_lg` (Large English model) is required for better entity recognition accuracy.
+
+### 5. NumPy (`numpy`)
+- **Purpose**: Array manipulation.
+- **Usage**: Handling image data arrays for OpenCV.
+
+## Installation
+To install all dependencies:
+```bash
+pip install -r requirements.txt
+python -m spacy download en_core_web_lg
+```

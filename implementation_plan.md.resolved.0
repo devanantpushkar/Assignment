@@ -1,0 +1,66 @@
+# OCR + PII Extraction Pipeline Implementation Plan
+
+## Goal Description
+Build an end-to-end pipeline to process handwritten document images (doctor/clinic notes), extract text, identify PII (Personal Identifiable Information), and optionally redact it. The solution will be delivered as a Jupyter Notebook.
+
+## User Review Required
+> [!IMPORTANT]
+> **OCR Engine Choice**: I plan to use `EasyOCR` (or `PaddleOCR` if performance requires) as it runs locally and supports handwriting better than Tesseract.
+> **PII Detection**: I will use `Microsoft Presidio` (powered by Spacy) for robust PII detection (names, dates, etc.).
+> **Environment**: The solution requires installing several Python packages.
+
+## Proposed Changes
+
+### Structure
+The project will be contained in a single directory with the following structure:
+- `project/`
+    - `data/` (for input images)
+    - `output/` (for results)
+    - `notebook.ipynb` (Main logic)
+    - `requirements.txt` (Dependencies)
+
+### Component: Pre-processing (OpenCV)
+- **File**: `notebook.ipynb`
+- **Logic**:
+    - **Grayscale conversion**: Simplify image.
+    - **Denoising**: GaussianBlur or MedianBlur.
+    - **Thresholding**: Adaptive thresholding to handle uneven lighting.
+    - **Deskewing**: Detect text orientation and correct tilt.
+
+### Component: OCR (EasyOCR / PaddleOCR)
+- **File**: `notebook.ipynb`
+- **Logic**:
+    - Initialize OCR reader for English.
+    - Pass pre-processed image.
+    - Extract text with bounding boxes.
+
+### Component: Text Cleaning & Correction
+- **File**: `notebook.ipynb`
+- **Logic**:
+    - Basic spell checking or regex cleaning to fix common OCR artifacts (optional, as handwriting is hard to auto-correct safely without context).
+    - Format text for PII detection.
+
+### Component: PII Detection (Microsoft Presidio)
+- **File**: `notebook.ipynb`
+- **Logic**:
+    - Initialize Presidio Analyzer.
+    - Define PII entities to look for (PERSON, DATE_TIME, PHONE_NUMBER, MEDICAL_LICENSE, etc.).
+    - Analyze extracted text.
+
+### Component: Redaction (OpenCV)
+- **File**: `notebook.ipynb`
+- **Logic**:
+    - Map PII entities back to bounding boxes (this is the tricky part: aligning 1D text PII back to 2D image coordinates).
+    - If exact alignment is complex, we will redact the *text* output or attempt best-effort visual redaction based on OCR bounding boxes matching the PII text.
+
+## Verification Plan
+
+### Automated Tests
+- Run the notebook cells sequentially.
+- Verify that `output/` folder contains the processed images.
+- Check if "Santosh" (visible in sample snippet) is detected as a PERSON.
+
+### Manual Verification
+- Inspect the generated `redacted_image.jpg`.
+- Read the extracted text to ensure legibility.
+- Verify PII entities list against visual inspection of the image.

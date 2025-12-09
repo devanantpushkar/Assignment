@@ -1,0 +1,38 @@
+# Walkthrough: OCR + PII Extraction Pipeline
+
+## Overview
+This project implements a pipeline to digitize handwritten medical notes and redact Personal Identifiable Information (PII).
+
+## Components Implemented
+1. **Pre-processing**: Adaptive thresholding to handle lighting variations and noise.
+2. **OCR**: EasyOCR engine configured for English.
+3. **PII Detection**: Microsoft Presidio Analyzer with Spacy backend.
+4. **Redaction**:
+   - **Text Redaction**: Replacing entities with `<ENTITY_TYPE>` tags.
+   - **visual Redaction**: Drawing black boxes over detected PII regions in the image.
+
+## How to Run
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   python -m spacy download en_core_web_lg
+   ```
+2. Run the Jupyter Notebook [notebook.ipynb](file:///C:/Users/DELL/.gemini/antigravity/brain/6546ecf0-1076-4564-9fe3-13258fcdd8d8/notebook.ipynb) or the script [pipeline.py](file:///C:/Users/DELL/.gemini/antigravity/brain/6546ecf0-1076-4564-9fe3-13258fcdd8d8/pipeline.py).
+
+## Results
+The pipeline processes images in the current directory and saves results to `output/`.
+
+### Example Output
+Check the `output/` directory for:
+- `redacted_<image_name>.jpg`: Image with PII blacked out.
+- `comparison_<image_name>.png`: Side-by-side comparison of Original vs Redacted.
+
+#### Visualization
+![Comparison Result 1](/C:/Users/DELL/.gemini/antigravity/brain/6546ecf0-1076-4564-9fe3-13258fcdd8d8/output/comparison_uploaded_image_0_1765290845912.jpg)
+![Comparison Result 2](/C:/Users/DELL/.gemini/antigravity/brain/6546ecf0-1076-4564-9fe3-13258fcdd8d8/output/comparison_uploaded_image_1_1765290845912.jpg)
+
+
+## Key Decisions
+- **EasyOCR**: Chosen for its offline capabilities and good handwriting support.
+- **Presidio**: Selected for robust, context-aware PII detection tailored for medical data (names, dates).
+- **Adaptive Thresholding**: Crucial for the provided samples which show uneven lighting/shadows.

@@ -1,0 +1,35 @@
+# OCR + PII Extraction Pipeline
+
+## Prerequisites
+- Python 3.8 or higher
+
+## Installation
+
+1. **Install Python Dependencies**:
+   Open a terminal in this directory and run:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Download NLP Model**:
+   This project uses Spacy for PII detection. You need to download the English model:
+   ```bash
+   python -m spacy download en_core_web_lg
+   ```
+
+## Usage
+
+### Option 1: Python Script (Fastest)
+Place your input images (JPEG format) in this directory.
+Run the pipeline script:
+```bash
+python pipeline.py
+```
+Results will be saved in the `output/` folder.
+
+### Option 2: Jupyter Notebook (Interactive)
+If you want to step through the code and see visualizations:
+```bash
+jupyter notebook notebook.ipynb
+```
+Open [notebook.ipynb](file:///C:/Users/DELL/.gemini/antigravity/brain/6546ecf0-1076-4564-9fe3-13258fcdd8d8/notebook.ipynb) in the browser interface and run the cells.

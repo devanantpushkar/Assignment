@@ -1,0 +1,8 @@
+opencv-python-headless
+numpy
+easyocr
+presidio-analyzer
+presidio-anonymizer
+spacy
+matplotlib
+ipykernel

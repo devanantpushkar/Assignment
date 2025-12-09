@@ -1,0 +1,18 @@
+# Task: OCR + PII Extraction Pipeline
+
+- [ ] Initialize Project and Planning <!-- id: 0 -->
+    - [ ] Create implementation plan <!-- id: 1 -->
+    - [ ] Explore provided images <!-- id: 2 -->
+- [ ] Implementation <!-- id: 3 -->
+    - [ ] Setup environment and dependencies <!-- id: 4 -->
+    - [ ] Implement Pre-processing (Tilt correction, etc.) <!-- id: 5 -->
+    - [ ] Implement OCR (Handwriting recognition) <!-- id: 6 -->
+    - [ ] Implement Text Cleaning <!-- id: 7 -->
+    - [ ] Implement PII Detection <!-- id: 8 -->
+    - [ ] Implement Redaction (Optional/Bonus) <!-- id: 9 -->
+    - [ ] Integrate into a single pipeline <!-- id: 10 -->
+- [ ] Verification and Deliverables <!-- id: 11 -->
+    - [ ] Test with provided images <!-- id: 12 -->
+    - [ ] Generate results screenshot <!-- id: 13 -->
+    - [ ] Finalize Python Notebook <!-- id: 14 -->
+    - [ ] Create Dependency Document <!-- id: 15 -->
